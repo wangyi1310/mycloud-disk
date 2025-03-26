@@ -27,12 +27,21 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       name: Check out code
+      
+    - name: set environment variables
+      id: env_vars
+      run: |
+        COMMIT_ID=${{ github.sha }}
+        SHORT_COMMIT_ID=${COMMIT_ID:0:7}
+        CURRENT_TIME=$(date --utc +"%Y%m%d%H%M%S")
+        TAG="${SHORT_COMMIT_ID}-${CURRENT_TIME}"
+        echo "::set-output name=tag::$TAG"
     
     - name: build && push image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
         image: mycloud-disk
-        tags: v1, latest
+        tags:  ${{ steps.env_vars.outputs.tag }}
         registry: ccr.ccs.tencentyun.com/ottoypwang12111
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKERHUB_USER }}
