@@ -33,7 +33,7 @@ jobs:
       run: |
         COMMIT_ID=${{ github.sha }}
         SHORT_COMMIT_ID=${COMMIT_ID:0:7}
-        CURRENT_TIME=$(date --utc +"%Y%m%d%H%M%S")
+        CURRENT_TIME=$(TZ="Asia/Shanghai" date +"%Y%m%d%H%M%S")
         TAG="${SHORT_COMMIT_ID}-${CURRENT_TIME}"
         echo "::set-output name=tag::$TAG"
     
