@@ -62,7 +62,6 @@ func WithContext(c context.Context) Option {
 	})
 }
 
-
 // WithHeader 设置请求Header
 func WithHeader(header http.Header) Option {
 	return optionFunc(func(o *options) {
