@@ -34,8 +34,6 @@
 
 ## 项目结构
 ### 项目模块结构
-![项目模块结构](path/to/your/mermaid/image.png)
-请将 `path/to/your/mermaid/image.png` 替换为你实际生成的模块结构图片路径。
 
 ### 详细目录说明
 - **根目录**：
