@@ -9,11 +9,9 @@
 
 ## 项目截图
 ### 主界面
-![主界面截图](https://example.com/main-interface.png)
 此截图展示了云盘的主界面，用户可在此进行文件的上传、下载和管理操作。
 
 ### 管理界面
-![管理界面截图](https://example.com/admin-interface.png)
 管理员能够在该界面进行系统配置和用户管理。
 
 ## 运行环境
