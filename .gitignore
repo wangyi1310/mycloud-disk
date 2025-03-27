@@ -1,2 +1,4 @@
 .idea/*
 mycloud-disk
+.vscode/*
+cloudreve.db

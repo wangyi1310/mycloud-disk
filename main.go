@@ -22,5 +22,4 @@ func init() {
 
 func main() {
 	log.Log().Warning("Hello World")
-
 }
