@@ -2,7 +2,6 @@ package request
 
 import (
 	"context"
-	"github.com/cloudreve/Cloudreve/v3/pkg/auth"
 	"net/http"
 	"net/url"
 	"strings"
@@ -17,7 +16,6 @@ type Option interface {
 type options struct {
 	timeout         time.Duration
 	header          http.Header
-	sign            auth.Auth
 	signTTL         int64
 	ctx             context.Context
 	contentLength   int64
@@ -64,13 +62,6 @@ func WithContext(c context.Context) Option {
 	})
 }
 
-// WithCredential 对请求进行签名
-func WithCredential(instance auth.Auth, ttl int64) Option {
-	return optionFunc(func(o *options) {
-		o.sign = instance
-		o.signTTL = ttl
-	})
-}
 
 // WithHeader 设置请求Header
 func WithHeader(header http.Header) Option {

@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
 
+	"github.com/wangyi1310/mycloud-disk/pkg/log"
 	"github.com/wangyi1310/mycloud-disk/pkg/util"
 )
 
@@ -19,5 +19,6 @@ func init() {
 }
 
 func main() {
-	fmt.Println("Hello World")
+	log.Log().Warning("Hello World")
+	
 }

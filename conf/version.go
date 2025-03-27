@@ -1,3 +1,5 @@
+package conf
+
 var BackendVersion = "1.1.1"
 
 // RequiredDBVersion 与当前版本匹配的数据库版本
