@@ -3,6 +3,8 @@ package conf
 import (
 	"github.com/go-ini/ini"
 	"github.com/go-playground/validator/v10"
+	"github.com/wangyi1310/mycloud-disk/pkg/log"
+	"github.com/wangyi1310/mycloud-disk/pkg/util"
 )
 
 // database 数据库
@@ -90,13 +92,13 @@ func Init(path string) {
 		}, defaultConf)
 		f, err := util.CreatNestedFile(path)
 		if err != nil {
-			util.Log().Panic("Failed to create config file: %s", err)
+			log.Log().Panic("Failed to create config file: %s", err)
 		}
 
 		// 写入配置文件
 		_, err = f.WriteString(confContent)
 		if err != nil {
-			util.Log().Panic("Failed to write config file: %s", err)
+			log.Log().Panic("Failed to write config file: %s", err)
 		}
 
 		f.Close()
@@ -104,7 +106,7 @@ func Init(path string) {
 
 	cfg, err = ini.Load(path)
 	if err != nil {
-		util.Log().Panic("Failed to parse config file %q: %s", path, err)
+		log.Log().Panic("Failed to parse config file %q: %s", path, err)
 	}
 
 	sections := map[string]interface{}{
@@ -119,7 +121,7 @@ func Init(path string) {
 	for sectionName, sectionStruct := range sections {
 		err = mapSection(sectionName, sectionStruct)
 		if err != nil {
-			util.Log().Panic("Failed to parse config section %q: %s", sectionName, err)
+			log.Log().Panic("Failed to parse config section %q: %s", sectionName, err)
 		}
 	}
 
@@ -130,9 +132,9 @@ func Init(path string) {
 
 	// 重设log等级
 	if !SystemConfig.Debug {
-		util.Level = util.LevelInformational
-		util.GloablLogger = nil
-		util.Log()
+		log.Level = log.LevelInformational
+		log.GloablLogger = nil
+		log.Log()
 	}
 
 }

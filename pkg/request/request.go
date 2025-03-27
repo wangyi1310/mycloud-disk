@@ -97,9 +97,9 @@ func (c *HTTPClient) Request(method, target string, body io.Reader, opts ...Opti
 	}
 
 	// if options.masterMeta && conf.SystemConfig.Mode == "master" {
-		// req.Header.Add(auth.CrHeaderPrefix+"Site-Url", model.GetSiteURL().String())
-		// req.Header.Add(auth.CrHeaderPrefix+"Site-Id", model.GetSettingByName("siteID"))
-		// req.Header.Add(auth.CrHeaderPrefix+"Cloudreve-Version", conf.BackendVersion)
+	// req.Header.Add(auth.CrHeaderPrefix+"Site-Url", model.GetSiteURL().String())
+	// req.Header.Add(auth.CrHeaderPrefix+"Site-Id", model.GetSettingByName("siteID"))
+	// req.Header.Add(auth.CrHeaderPrefix+"Cloudreve-Version", conf.BackendVersion)
 	//}
 
 	// if options.slaveNodeID != "" && conf.SystemConfig.Mode == "slave" {
