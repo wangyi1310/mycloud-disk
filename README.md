@@ -35,11 +35,6 @@
 
 ### 详细目录说明
 - **根目录**：
-    - `.git/`：Git 版本控制目录。
-    - `.github/`：GitHub 相关配置目录。
-    - `.gitignore`：用于忽略不需要纳入版本控制的文件和目录。
-    - `.idea/`：IntelliJ IDEA 相关配置目录。
-    - `.vscode/`：Visual Studio Code 相关配置目录。
     - `Dockerfile`：用于构建 Docker 镜像的文件。
     - `README.md`：本项目说明文档。
     - `bootstrap/`：项目初始化相关代码。
