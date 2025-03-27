@@ -7,6 +7,7 @@ import (
 	"github.com/hashicorp/go-version"
 	"github.com/wangyi1310/mycloud-disk/conf"
 	"github.com/wangyi1310/mycloud-disk/pkg/log"
+	"github.com/wangyi1310/mycloud-disk/pkg/request"
 )
 
 type GitHubRelease struct {
