@@ -8,7 +8,7 @@ import (
 )
 
 func Init() *gin.Engine {
-	if conf.SystemConfig.Mode == "Master" {
+	if conf.SystemConfig.Mode == "master" {
 		log.Log().Info("Current runing mode: Master")
 		return InitMaster()
 	} else {
@@ -22,7 +22,7 @@ func InitMaster() *gin.Engine {
 	v3 := r.Group("/api/v3")
 	site := v3.Group("site")
 	{
-		site.GET("/ping", controllers.Ping)
+		site.GET("ping", controllers.Ping)
 		// site.GET("captcha")
 		// site.GET("config")
 	}
