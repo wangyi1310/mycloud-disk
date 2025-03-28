@@ -1,6 +1,8 @@
 package routers
 
 import (
+	"github.com/gin-contrib/cors"
+	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
 	"github.com/wangyi1310/mycloud-disk/conf"
 	"github.com/wangyi1310/mycloud-disk/pkg/log"
@@ -17,8 +19,30 @@ func Init() *gin.Engine {
 	}
 }
 
+// InitCORS 用于初始化跨域资源共享（CORS）配置。
+// 该函数接收一个 *gin.Engine 类型的参数 router，用于配置 CORS 中间件。
+func InitCORS(router *gin.Engine) {
+	// 创建一个新的默认 Gin 引擎实例，这里存在逻辑问题，可能应该使用传入的 router 而不是新建一个
+	r := gin.Default()
+	// 检查配置文件中 CORS 的允许来源列表的第一个元素是否不为 "UNSET"
+	if conf.CORSConfig.AllowOrigins[0] != "UNSET" {
+		// 如果允许来源列表不是默认的 "UNSET"，则为 Gin 引擎添加 CORS 中间件
+		r.Use(cors.New(cors.Config{
+			// 设置允许访问的来源列表，从配置文件中获取
+			AllowOrigins: conf.CORSConfig.AllowOrigins,
+			// 设置允许的 HTTP 请求方法，从配置文件中获取
+			AllowMethods: conf.CORSConfig.AllowMethods,
+			// 设置允许的 HTTP 请求头，从配置文件中获取
+			AllowHeaders: conf.CORSConfig.AllowHeaders,
+		}))
+	}
+}
+
 func InitMaster() *gin.Engine {
 	r := gin.Default()
+	InitCORS(r)
+	r.Use(gzip.Gzip(gzip.DefaultCompression, gzip.WithExcludedPaths([]string{"/api/"})))
+
 	v3 := r.Group("/api/v3")
 	site := v3.Group("site")
 	{

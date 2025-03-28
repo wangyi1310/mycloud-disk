@@ -93,4 +93,5 @@ func Init() {
 
 	db.DB().SetConnMaxLifetime(time.Second * 30)
 	DB = db
+
 }

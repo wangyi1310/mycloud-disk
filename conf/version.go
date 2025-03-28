@@ -1,6 +1,6 @@
 package conf
 
-var BackendVersion = "1.1.1"
+var BackendVersion = "v0.0.1"
 
 // RequiredDBVersion 与当前版本匹配的数据库版本
 var RequiredDBVersion = "1.1.1"
