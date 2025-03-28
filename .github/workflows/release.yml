@@ -16,13 +16,13 @@ jobs:
         id: release-drafter
         uses: release-drafter/release-drafter@v5
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的默认 token
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # 使用 GitHub 提供的默认 token
         with:
           tag_name: ${{ github.ref_name }}  # 使用当前推送的 tag 作为 release 的 tag
           release_name: Release ${{ github.ref_name }}  # release 的名称
