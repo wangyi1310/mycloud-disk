@@ -5,6 +5,7 @@ import (
 	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
 	"github.com/wangyi1310/mycloud-disk/conf"
+	"github.com/wangyi1310/mycloud-disk/middleware"
 	"github.com/wangyi1310/mycloud-disk/pkg/log"
 	"github.com/wangyi1310/mycloud-disk/routers/controllers"
 )
@@ -42,12 +43,14 @@ func InitMaster() *gin.Engine {
 	r := gin.Default()
 	InitCORS(r)
 	r.Use(gzip.Gzip(gzip.DefaultCompression, gzip.WithExcludedPaths([]string{"/api/"})))
-
 	v3 := r.Group("/api/v3")
+	v3.Use(middleware.Session(conf.SystemConfig.SessionSecret))
+	v3.Use(middleware.CurrentUser())
+
 	site := v3.Group("site")
 	{
 		site.GET("ping", controllers.Ping)
-		// site.GET("captcha")
+		site.GET("captcha", controllers.Captcha)
 		// site.GET("config")
 	}
 	return r
