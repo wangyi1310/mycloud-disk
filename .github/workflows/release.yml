@@ -36,13 +36,56 @@ jobs:
         dockerfile: Dockerfile
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-        
+
+  build-binaries:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [linux, windows, darwin]
+        goarch: [amd64, arm64]
+    steps:
+      - uses: actions/checkout@v3
+        name: Check out code
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.23'
+
+      - name: Build binary
+        env:
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+           # 根据不同系统生成不同扩展名的二进制文件
+           if [ "${{ matrix.goos }}" == "windows" ]; then
+            go build -o mycloud-disk-${{ matrix.goos }}-${{ matrix.goarch }}.exe 
+           else
+            go build -o mycloud-disk-${{ matrix.goos }}-${{ matrix.goarch }}
+           fi
+      
+      - name: Upload binary for Windows
+        if: ${{ matrix.goos == 'windows' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: mycloud-disk-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: mycloud-disk-${{ matrix.goos }}-${{ matrix.goarch }}.exe
+
+      - name: Upload binary for non-Windows
+        if: ${{ matrix.goos != 'windows' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: mycloud-disk-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: mycloud-disk-${{ matrix.goos }}-${{ matrix.goarch }}
+
+
   create-release:
     runs-on: ubuntu-latest
+    needs: [build_image, build-binaries]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3  # 检出代码到工作区
-
+        
       - name: Generate Changelog
         id: generate-changelog
         run: |
@@ -56,8 +99,8 @@ jobs:
           fi
           # 严格按 GitHub Actions 格式输出
           echo "changelog=$COMMITS" >> $GITHUB_OUTPUT
-
       - name: Create Release
+        id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}  # 推荐使用默认的 GITHUB_TOKEN
@@ -69,4 +112,15 @@ jobs:
           body: |
             # 版本说明：${{ github.ref_name }}
             ## 变更日志
-            ${{ steps.generate-changelog.outputs.changelog }}  
+            ${{ steps.generate-changelog.outputs.changelog }}
+              
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: |
+            mycloud-disk-*
