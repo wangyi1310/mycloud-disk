@@ -116,7 +116,7 @@ jobs:
               
       - name: Download all artifacts
         uses: actions/download-artifact@v4
-        
+
       - name: Upload release assets
         uses: softprops/action-gh-release@v1
         env:
@@ -124,4 +124,4 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           files: |
-            mycloud-disk-*
+            */mycloud-disk-*
