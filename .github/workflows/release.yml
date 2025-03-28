@@ -13,22 +13,29 @@ jobs:
         uses: actions/checkout@v3  # 检出代码到工作区
 
       - name: Generate Changelog
-        id: release-drafter
-        uses: release-drafter/release-drafter@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        id: generate-changelog
+        run: |
+          # 获取上一个标签（如果存在）
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 @^ 2>/dev/null || echo "")
+          # 生成变更日志：仅显示 feat/fix 等关键提交
+          if [ -z "$PREVIOUS_TAG" ]; then
+            COMMITS="首次发布，无历史变更记录。"
+          else
+            COMMITS=$(git log --pretty=format:"- %s (%h)" $PREVIOUS_TAG..@ --no-merges)
+          fi
+          # 严格按 GitHub Actions 格式输出
+          echo "changelog=$COMMITS" >> $GITHUB_OUTPUT
 
       - name: Create Release
-        id: create_release
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # 使用 GitHub 提供的默认 token
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}  # 推荐使用默认的 GITHUB_TOKEN
         with:
-          tag_name: ${{ github.ref_name }}  # 使用当前推送的 tag 作为 release 的 tag
-          release_name: Release ${{ github.ref_name }}  # release 的名称
-          draft: false  # 不创建草稿 release
-          prerelease: false  # 不创建预发布版本
+          tag_name: ${{ github.ref_name }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
           body: |
             # 版本说明：${{ github.ref_name }}
             ## 变更日志
-            ${{ steps.release-drafter.outputs.body }}
+            ${{ steps.generate-changelog.outputs.changelog }}  
