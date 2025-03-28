@@ -1,0 +1,34 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - '*'  # 当有任何新的 tag 被推送时触发此工作流
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # 检出代码到工作区
+
+      - name: Generate Changelog
+        id: release-drafter
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 使用 GitHub 提供的默认 token
+        with:
+          tag_name: ${{ github.ref_name }}  # 使用当前推送的 tag 作为 release 的 tag
+          release_name: Release ${{ github.ref_name }}  # release 的名称
+          draft: false  # 不创建草稿 release
+          prerelease: false  # 不创建预发布版本
+          body: |
+            # 版本说明：${{ github.ref_name }}
+            ## 变更日志
+            ${{ steps.release-drafter.outputs.body }}
