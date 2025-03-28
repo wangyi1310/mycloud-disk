@@ -10,6 +10,33 @@ permissions:
   pull-requests: write
 
 jobs:
+  build_image:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      name: Check out code
+      
+    - name: set environment variables
+      id: env_vars
+      run: |
+        TAG_NAME=${{ github.ref_name }}
+        CURRENT_TIME=$(TZ="Asia/Shanghai" date +"%Y%m%d%H%M%S")
+        TAG="${TAG_NAME}-${CURRENT_TIME}"
+        echo "::set-output name=tag::$TAG"
+    
+    - name: build && push image
+      uses: mr-smithers-excellent/docker-build-push@v6
+      with:
+        image: mycloud-disk
+        tags:  ${{ steps.env_vars.outputs.tag }}
+        registry: ccr.ccs.tencentyun.com/ottoypwang12111
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKERHUB_USER }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        
   create-release:
     runs-on: ubuntu-latest
     steps:
