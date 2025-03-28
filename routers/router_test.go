@@ -1,4 +1,4 @@
-package tests
+package routers
 
 import (
 	"net/http"
@@ -7,13 +7,12 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/wangyi1310/mycloud-disk/conf"
-	"github.com/wangyi1310/mycloud-disk/routers"
 )
 
 func TestPing(t *testing.T) {
 	t.Log("test ping")
 	asserts := assert.New(t)
-	router := routers.InitMaster()
+	router := InitMaster()
 	rsp := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/api/v3/site/ping", nil)
 	router.ServeHTTP(rsp, req)
