@@ -1,6 +1,12 @@
 # mycloud-disk
 
-![Go](https://img.shields.io/badge/Go-23.1-blue.svg) 🔥 开启 Go 语言云盘项目之旅
+🔥 开启 Go 语言云盘项目之旅
+
+![Go](https://img.shields.io/badge/Go-23.1-blue.svg)
+![SQLite](https://img.shields.io/badge/SQLite-3.39.4-yellow.svg)
+![MySQL](https://img.shields.io/badge/MySQL-8.0.26-green.svg)
+[![Build status](https://ci.appveyor.com/api/projects/status/w7en0t9e3yat92sb?svg=true)](https://ci.appveyor.com/project/wangyi1310/mycloud-disk)
+
 
 这是一个使用 Go 语言开发的项目，致力于打造一个高效、安全的云盘系统。
 
@@ -89,11 +95,6 @@
 - `BuildLogger()`：构建日志记录器。
 - `Log()`：返回日志记录器实例。
 
-## 技术栈
-![Go](https://img.shields.io/badge/Go-23.1-blue.svg)
-![SQLite](https://img.shields.io/badge/SQLite-3.39.4-yellow.svg)
-![MySQL](https://img.shields.io/badge/MySQL-8.0.26-green.svg)
-本项目主要使用了 Go 语言、SQLite 和 MySQL 数据库。
 
 ## 贡献指南
 如果你想为这个项目做出贡献，请参考 [贡献指南](CONTRIBUTING.md)。
