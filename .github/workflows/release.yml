@@ -84,7 +84,9 @@ jobs:
     needs: [build-binaries]
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # 检出代码到工作区
+        uses: actions/checkout@v3 
+        with:
+          fetch-depth: 0 # 检出代码到工作区
         
       - name: Generate Changelog
         id: generate-changelog
