@@ -7,7 +7,11 @@ import (
 	"github.com/wangyi1310/mycloud-disk/models"
 	"github.com/wangyi1310/mycloud-disk/pkg/session"
 	"github.com/wangyi1310/mycloud-disk/serializer"
+	"github.com/wangyi1310/mycloud-disk/services"
 )
+
+// UserService 实例化UserService
+var userService = services.UserService{}
 
 func Ping(c *gin.Context) {
 	version := conf.BackendVersion

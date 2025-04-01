@@ -3,3 +3,4 @@ mycloud-disk
 .vscode/*
 cloudreve.db
 __debug*
+conf.ini

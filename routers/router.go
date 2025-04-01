@@ -6,6 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/wangyi1310/mycloud-disk/conf"
 	"github.com/wangyi1310/mycloud-disk/middleware"
+	"github.com/wangyi1310/mycloud-disk/pkg/auth"
+	"github.com/wangyi1310/mycloud-disk/pkg/hashid"
 	"github.com/wangyi1310/mycloud-disk/pkg/log"
 	"github.com/wangyi1310/mycloud-disk/routers/controllers"
 )
@@ -46,12 +48,22 @@ func InitMaster() *gin.Engine {
 	v3 := r.Group("/api/v3")
 	v3.Use(middleware.Session(conf.SystemConfig.SessionSecret))
 	v3.Use(middleware.CurrentUser())
-
+	v3.Use(middleware.CacheControl())
 	site := v3.Group("site")
 	{
 		site.GET("ping", controllers.Ping)
 		site.GET("captcha", controllers.Captcha)
-		// site.GET("config")
+		site.GET("config", controllers.GetSiteConfig)
+	}
+
+	user := v3.Group("user")
+	{
+		user.POST("register", middleware.IsFunctionEnabled("register_enabled"), controllers.UserRegister)
+		user.GET("activate/:id",
+			middleware.SignRequired(auth.General),
+			middleware.HashID(hashid.UserID),
+			controllers.UserActive,
+		)
 	}
 	return r
 }

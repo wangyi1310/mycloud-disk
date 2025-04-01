@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -29,5 +30,17 @@ func TestCaptcha(t *testing.T) {
 	rsp := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/api/v3/site/captcha", nil)
 	router.ServeHTTP(rsp, req)
+	asserts.Equal(rsp.Code, 200)
+}
+
+func TestSiteConf(t *testing.T) {
+	t.Log("test conf")
+	asserts := assert.New(t)
+	models.Init()
+	router := InitMaster()
+	rsp := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/api/v3/site/config", nil)
+	router.ServeHTTP(rsp, req)
+	fmt.Println(rsp.Body.String())
 	asserts.Equal(rsp.Code, 200)
 }
