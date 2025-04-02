@@ -25,8 +25,16 @@ var (
 
 const CrHeaderPrefix = "X-Cr-"
 
-// General 通用的认证接口
-var General Auth
+const (
+	HMAC_SHA1 = iota
+	HMAC_SHA256
+	HMAC_SHA384
+	HMAC_SHA512
+	CUSTOME_HMAC
+)
+
+var DefaultAuthType = HMAC_SHA256
+var AuthTypeToValue = map[int]Auth{}
 
 // Auth 鉴权认证
 type Auth interface {
@@ -128,6 +136,14 @@ func CheckURI(instance Auth, url *url.URL) error {
 	return instance.Check(url.Path, sign)
 }
 
+func GetDefaultAuth() Auth {
+	return AuthTypeToValue[DefaultAuthType]
+}
+
+func GetAuthByType(authType int) Auth {
+	return AuthTypeToValue[authType]
+}
+
 // Init 初始化通用鉴权器
 func Init() {
 	var secretKey string
@@ -139,7 +155,8 @@ func Init() {
 			log.Log().Panic("SlaveSecret is not set, please specify it in config file.")
 		}
 	}
-	General = HMACAuth{
+
+	AuthTypeToValue[HMAC_SHA256] = HMACAuth{
 		SecretKey: []byte(secretKey),
 	}
 }

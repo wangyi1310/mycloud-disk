@@ -45,7 +45,7 @@ func (userService *UserService) Register(r *RegisterUser) serializer.Response {
 		base := models.GetSiteURL()
 		userID := hashid.HashID(user.ID, hashid.UserID)
 		controller, _ := url.Parse("/api/v3/user/activate/" + userID)
-		activateURL, err := auth.SignURI(auth.General, base.ResolveReference(controller).String(), 86400)
+		activateURL, err := auth.SignURI(auth.GetDefaultAuth(), base.ResolveReference(controller).String(), 86400)
 		if err != nil {
 			return serializer.Err(serializer.CodeEncryptError, "Failed to sign the activation link", err)
 		}
