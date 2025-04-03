@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户注册与激活</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>用户注册</h1>
+        <form id="registrationForm">
+            <label for="username">用户名:</label>
+            <input type="text" id="username" required>
+            <label for="email">邮箱:</label>
+            <input type="email" id="email" required>
+            <label for="password">密码:</label>
+            <input type="password" id="password" required>
+            <button type="submit">注册</button>
+        </form>
+
+        <h1>用户激活</h1>
+        <form id="activationForm">
+            <label for="activationCode">激活码:</label>
+            <input type="text" id="activationCode" required>
+            <button type="submit">激活</button>
+        </form>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

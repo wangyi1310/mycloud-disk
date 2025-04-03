@@ -13,23 +13,25 @@ type UserService struct {
 }
 
 type RegisterUser struct {
-	Name  string
-	Age   int
-	Email string
+	Name     string `json:"name" binding:"required,min=2,max=30"`
+	Password string `json:"password" binding:"required,min=8,max=40"`
+	Email    string `json:"email" binding:"required,email"`
 }
 
 type ActiveUser struct {
-	Uid interface{}
+	Uid any
 }
 
 func (userService *UserService) Register(r *RegisterUser) serializer.Response {
 	opitons := models.GetSettingByNames("register_opitons_active")
-	enableEmailActive := models.IsTrueVal(opitons["enable_email"])
+	enableEmailActive := models.IsTrueVal(opitons["email_active"])
 	user := models.NewUser()
 	if enableEmailActive {
 		user.Status = models.NotActivicated
 	}
-
+	user.Nick = r.Name
+	user.Email = r.Email
+	user.SetPassword(r.Password)
 	userNotActivated := false
 	if err := models.DB.Create(&user).Error; err != nil {
 		// 注册失败

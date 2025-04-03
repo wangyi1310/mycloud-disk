@@ -3,7 +3,7 @@ package auth
 import (
 	"bytes"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"sort"
@@ -81,9 +81,9 @@ func getSignContent(r *http.Request) (rawSignString string) {
 	var body = []byte{}
 	if !strings.Contains(r.URL.Path, "/api/v3/slave/upload/") {
 		if r.Body != nil {
-			body, _ = ioutil.ReadAll(r.Body)
+			body, _ = io.ReadAll(r.Body)
 			_ = r.Body.Close()
-			r.Body = ioutil.NopCloser(bytes.NewReader(body))
+			r.Body = io.NopCloser(bytes.NewReader(body))
 		}
 	}
 

@@ -65,6 +65,8 @@ func InitMaster() *gin.Engine {
 			controllers.UserActive,
 		)
 	}
+
+	r.Static("/static", "./static")
 	return r
 }
 
