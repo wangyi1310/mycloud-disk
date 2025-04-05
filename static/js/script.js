@@ -13,17 +13,17 @@ document.getElementById('registrationForm').addEventListener('submit', function 
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            username: username,
+            name: username,
             email: email,
             password: password
         })
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            alert('注册成功，请查收激活邮件！');
+        if (data.code == 200) {
+            alert('注册成功.' + data.msg);
         } else {
-            alert('注册失败：' + data.message);
+            alert('注册失败：' + data.msg);
         }
     })
     .catch(error => {
