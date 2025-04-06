@@ -132,8 +132,12 @@ func CheckURI(instance Auth, url *url.URL) error {
 	sign := queries.Get("sign")
 	queries.Del("sign")
 	url.RawQuery = queries.Encode()
+	pathWithQuery := url.Path
+	if url.RawQuery != "" {
+        pathWithQuery = fmt.Sprintf("%s?%s", url.Path, url.RawQuery)
+    }
 
-	return instance.Check(url.Path, sign)
+	return instance.Check(pathWithQuery, sign)
 }
 
 func GetDefaultAuth() Auth {

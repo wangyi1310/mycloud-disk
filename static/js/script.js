@@ -30,32 +30,3 @@ document.getElementById('registrationForm').addEventListener('submit', function 
         alert('网络错误：' + error.message);
     });
 });
-
-// 激活表单提交事件
-document.getElementById('activationForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    const activationCode = document.getElementById('activationCode').value;
-
-    // 这里需要替换为实际的后端激活接口地址
-    const activationUrl = '/api/v3/user/activate';
-    fetch(activationUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            activationCode: activationCode
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('激活成功！');
-        } else {
-            alert('激活失败：' + data.message);
-        }
-    })
-    .catch(error => {
-        alert('网络错误：' + error.message);
-    });
-});

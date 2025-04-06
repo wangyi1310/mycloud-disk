@@ -59,7 +59,7 @@ func InitMaster() *gin.Engine {
 	user := v3.Group("user")
 	{
 		user.POST("register", middleware.IsFunctionEnabled("register_enabled"), controllers.UserRegister)
-		user.GET("activate/:id",
+		user.GET("activate",
 			middleware.SignRequired(auth.GetDefaultAuth()),
 			middleware.HashID(hashid.UserID),
 			controllers.UserActive,

@@ -6,6 +6,7 @@ import (
 	"github.com/wangyi1310/mycloud-disk/services"
 )
 
+
 // UserRegister 用户注册
 func UserRegister(c *gin.Context) {
 	// 注册逻辑
@@ -15,13 +16,13 @@ func UserRegister(c *gin.Context) {
 	if err != nil {
 		res = serializer.Err(serializer.CodeParamErr, "参数错误", err)
 	}
-	res = userService.Register(&register)
+	res = services.Register(&register)
 	c.JSON(200, res)
 }
 
 func UserActive(c *gin.Context) {
 	uid, _ := c.Get("object_id")
-	res := userService.Activate(&services.ActiveUser{
+	res := services.Activate(&services.ActiveUser{
 		Uid: uid,
 	})
 	c.JSON(200, res)

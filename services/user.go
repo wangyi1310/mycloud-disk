@@ -22,9 +22,9 @@ type ActiveUser struct {
 	Uid any
 }
 
-func (userService *UserService) Register(r *RegisterUser) serializer.Response {
-	opitons := models.GetSettingByNames("register_opitons_active")
-	enableEmailActive := models.IsTrueVal(opitons["email_active"])
+func Register(r *RegisterUser) serializer.Response {
+	options := models.GetSettingByNames("email_active")
+	enableEmailActive := models.IsTrueVal(options["email_active"])
 	user := models.NewUser()
 	if enableEmailActive {
 		user.Status = models.NotActivicated
@@ -79,7 +79,7 @@ func (userService *UserService) Register(r *RegisterUser) serializer.Response {
 	return serializer.Response{Code: 200}
 }
 
-func (service *UserService) Activate(u *ActiveUser) serializer.Response {
+func Activate(u *ActiveUser) serializer.Response {
 	// 查找待激活用户
 	uid := u.Uid
 	user, err := models.GetUserByID(uid.(uint))
