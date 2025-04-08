@@ -37,6 +37,9 @@
 ### 项目模块结构
 ![project_module.png…](https://github.com/wangyi1310/occrq-disk/blob/main/resources/pictures/diagram.png)
 
+使用  [gitdiagram](https://gitdiagram.com/) 自动生成。
+
+
 
 ### 详细目录说明
 - **根目录**：
