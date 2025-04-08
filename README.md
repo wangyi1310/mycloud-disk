@@ -35,7 +35,7 @@
 
 ## 项目结构
 ### 项目模块结构
-![Uploading Clipboard_Screenshot_1744090904.png…]()
+[![project_module.png…]()](https://github.com/wangyi1310/occrq-disk/blob/main/resources/pictures/diagram.png)
 
 
 ### 详细目录说明
