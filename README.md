@@ -24,18 +24,18 @@
 1. **安装 Go 环境**：确保你已安装 Go 23.1 或更高版本。
 2. **克隆项目**：
     ```bash
-    git clone https://github.com/wangyi1310/mycloud-disk.git
-    cd mycloud-disk
+    git clone https://github.com/wangyi1310/occrq-cloud-disk.git
+    cd occrq-cloud-disk
     ```
 3. **编译并运行**：
     ```bash
-    go build -o mycloud-disk .
-    ./mycloud-disk
+    go build -ooccrq-cloud-disk .
+    ./occrq-cloud-disk
     ```
 
 ## 项目结构
 ### 项目模块结构
-![project_module.png…](https://github.com/wangyi1310/occrq-disk/blob/main/resources/pictures/diagram.png)
+![project_module.png…](https://github.com/wangyi1310/occrq-disk/blob/main/src/pictures/diagram.png)
 
 使用  [gitdiagram](https://gitdiagram.com/) 自动生成。
 
