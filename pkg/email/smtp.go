@@ -2,6 +2,7 @@ package email
 
 import (
 	"fmt"
+	"github.com/wangyi1310/mycloud-disk/conf"
 	"time"
 
 	"github.com/google/uuid"
@@ -47,6 +48,12 @@ func (client *SMTP) Send(to, title, body string) error {
 	if !client.chOpen {
 		return ErrChanNotOpen
 	}
+	// Debug 模式下直接打印邮件内容，不需要发送
+	if conf.SystemConfig.Debug {
+		log.Log().Debug("Send email to %s, title: %s, body: %s", to, title, body)
+		return nil
+	}
+
 	m := mail.NewMessage()
 	m.SetAddressHeader("From", client.Config.Address, client.Config.Name)
 	m.SetAddressHeader("Reply-To", client.Config.ReplyTo, client.Config.Name)

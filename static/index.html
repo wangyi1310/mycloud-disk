@@ -1,27 +1,40 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>用户注册与激活</title>
+    <title>我的云盘</title>
+    <!-- 引入自定义样式文件 -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
-    <div class="container">
-        <h1>用户注册</h1>
-        <form id="registrationForm">
-            <label for="username">用户名:</label>
-            <input type="text" id="username" required>
-            <label for="email">邮箱:</label>
-            <input type="email" id="email" required>
-            <label for="password">密码:</label>
-            <input type="password" id="password" required>
+    <!-- 头部导航栏 -->
+    <header class="header">
+        <div class="logo">我的云盘</div>
+        <nav class="nav">
+            <a href="#">首页</a>
+            <a href="#">文件</a>
+            <a href="#">分享</a>
+        </nav>
+        <div class="user-info">
+            <span>用户名</span>
+            <img src="images/avatar.png" alt="头像">
+        </div>
+    </header>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <!-- 注册表单 -->
+        <form id="registrationForm" class="registration-form">
+            <h2>注册</h2>
+            <input type="text" id="username" placeholder="用户名">
+            <input type="email" id="email" placeholder="邮箱">
+            <input type="password" id="password" placeholder="密码">
             <button type="submit">注册</button>
         </form>
-    </div>
+    </main>
+
+    <!-- 引入脚本文件 -->
     <script src="js/script.js"></script>
 </body>
-
 </html>

@@ -20,7 +20,8 @@ document.getElementById('registrationForm').addEventListener('submit', function 
     })
     .then(response => response.json())
     .then(data => {
-        if (data.code == 200) {
+        const code = Number(data.code);
+        if (code == 203 || code == 200) {
             alert('注册成功.' + data.msg);
         } else {
             alert('注册失败：' + data.msg);

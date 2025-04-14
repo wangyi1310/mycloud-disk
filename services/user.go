@@ -46,7 +46,7 @@ func Register(r *RegisterUser) serializer.Response {
 	if enableEmailActive {
 		base := models.GetSiteURL()
 		userID := hashid.HashID(user.ID, hashid.UserID)
-		controller, _ := url.Parse("/api/v3/user/activate/" + userID)
+		controller, _ := url.Parse("/api/v3/user/activate?id=" + userID)
 		activateURL, err := auth.SignURI(auth.GetDefaultAuth(), base.ResolveReference(controller).String(), 86400)
 		if err != nil {
 			return serializer.Err(serializer.CodeEncryptError, "Failed to sign the activation link", err)
@@ -54,7 +54,7 @@ func Register(r *RegisterUser) serializer.Response {
 
 		// 取得签名
 		credential := activateURL.Query().Get("sign")
-		controller, _ = url.Parse("/activate")
+		controller, _ = url.Parse("/api/v3/user/activate")
 		finalURL := base.ResolveReference(controller)
 		queries := finalURL.Query()
 		queries.Add("id", userID)
@@ -72,7 +72,7 @@ func Register(r *RegisterUser) serializer.Response {
 			//原本在上面要抛出的DBErr，放来这边抛出
 			return serializer.Err(serializer.CodeEmailSent, "User is not activated, activation email has been resent", nil)
 		} else {
-			return serializer.Response{Code: 203}
+			return serializer.Response{Code: 203, Msg: "Success to send activation email, please check your email!"}
 		}
 
 	}

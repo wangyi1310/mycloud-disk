@@ -69,8 +69,8 @@ func IsFunctionEnabled(key string) gin.HandlerFunc {
 // HashID 将给定对象的HashID转换为真实ID
 func HashID(IDType int) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if c.Param("id") != "" {
-			id, err := hashid.DecodeHashID(c.Param("id"), IDType)
+		if c.Query("id") != "" {
+			id, err := hashid.DecodeHashID(c.Query("id"), IDType)
 			if err == nil {
 				c.Set("object_id", id)
 				c.Next()
