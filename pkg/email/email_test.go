@@ -14,7 +14,7 @@ func TestSendEmail(t *testing.T) {
 	// 	Host:       "smtp.gmail.com",
 	// 	Port:       587,
 	// 	User:       "wangyipeng11111@gmail.com",
-	// 	Password:   "cjxqbidjgigobojq",
+	// 	Password:   "",
 	// 	Keepalive:  3000,
 	// 	Encryption: false,
 	// })
