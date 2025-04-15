@@ -9,6 +9,7 @@ import (
 	"github.com/wangyi1310/mycloud-disk/pkg/auth"
 	"github.com/wangyi1310/mycloud-disk/pkg/hashid"
 	"github.com/wangyi1310/mycloud-disk/pkg/log"
+	"github.com/wangyi1310/mycloud-disk/pkg/session"
 	"github.com/wangyi1310/mycloud-disk/routers/controllers"
 )
 
@@ -44,6 +45,8 @@ func InitCORS(router *gin.Engine) {
 func InitMaster() *gin.Engine {
 	r := gin.Default()
 	InitCORS(r)
+	session.Init()
+
 	r.Use(gzip.Gzip(gzip.DefaultCompression, gzip.WithExcludedPaths([]string{"/api/"})))
 	v3 := r.Group("/api/v3")
 	//设置session存储器
