@@ -1,0 +1,43 @@
+#!/bin/sh
+
+# 获取提交消息内容
+COMMIT_MSG=$(cat "$1")
+
+# 根据提交类型匹配 emoji
+case "$COMMIT_MSG" in
+  feat:*|feature:*|add:*)
+    EMOJI=":sparkles:"  # 新功能
+    ;;
+  fix:*|bugfix:*)
+    EMOJI=":bug:"       # Bug 修复
+    ;;
+  docs:*|document:*)
+    EMOJI=":memo:"      # 文档更新
+    ;;
+  style:*|format:*)
+    EMOJI=":art:"       # 代码样式调整
+    ;;
+  refactor:*)
+    EMOJI=":recycle:"   # 重构代码
+    ;;
+  perf:*|performance:*)
+    EMOJI=":zap:"       # 性能优化
+    ;;
+  test:*)
+    EMOJI=":white_check_mark:"  # 测试相关
+    ;;
+  chore:*|ci:*|build:*)
+    EMOJI=":wrench:"    # 构建/工具改动
+    ;;
+  revert:*)
+    EMOJI=":rewind:"    # 回滚代码
+    ;;
+  *)
+    EMOJI=":pencil:"    # 默认 emoji（未匹配到类型）
+    ;;
+esac
+
+# 在消息开头插入 emoji（避免重复添加）
+if ! echo "$COMMIT_MSG" | grep -qE "^:[a-z_]+:"; then
+  echo "$EMOJI $COMMIT_MSG" > "$1"
+fi
