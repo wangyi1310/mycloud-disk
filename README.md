@@ -1,4 +1,4 @@
-# mycloud-disk
+# occrq-cloud-disk
 ![Go](https://img.shields.io/badge/Go-23.1-blue.svg)
 ![SQLite](https://img.shields.io/badge/SQLite-3.39.4-yellow.svg)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0.26-green.svg)
