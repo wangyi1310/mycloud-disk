@@ -47,7 +47,6 @@ func InitMaster() *gin.Engine {
 	r.Use(gzip.Gzip(gzip.DefaultCompression, gzip.WithExcludedPaths([]string{"/api/"})))
 	v3 := r.Group("/api/v3")
 	//设置session存储器
-	v3.Use(middleware.Session(conf.SystemConfig.SessionSecret))
 	v3.Use(middleware.CurrentUser())
 	v3.Use(middleware.CacheControl())
 	site := v3.Group("site")

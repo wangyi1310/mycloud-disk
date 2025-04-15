@@ -9,20 +9,20 @@ import (
 
 func UserLogin(c *gin.Context) {
 	var login services.LoginUser
-	if err := c.ShouldBindJSON(&login); err == nil {
-		user, err := services.Login(&login)
-		if err != nil {
-			c.JSON(200, serializer.Err(serializer.CodeCredentialInvalid, "Failed to login", err))
-		}
-
-		session.SetSession(c, map[string]interface{}{
-			"user_id": user.ID,
-		})
-		c.JSON(200, user)
-
-	} else {
+	if err := c.ShouldBindJSON(&login); err != nil {
 		c.JSON(200, serializer.Err(serializer.CodeParamErr, "Failed to parse params", err))
+		return
 	}
+	user, err := services.Login(&login)
+	if err != nil {
+		c.JSON(200, serializer.Err(serializer.CodeCredentialInvalid, "Wrong email or password", err))
+		return
+	}
+
+	session.SetSession(c, map[string]interface{}{
+		"user_id": user.ID,
+	})
+	c.JSON(200, user)
 }
 
 // UserRegister 用户注册

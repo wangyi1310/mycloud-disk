@@ -7,6 +7,7 @@ import (
 	"github.com/wangyi1310/mycloud-disk/pkg/auth"
 	"github.com/wangyi1310/mycloud-disk/pkg/cache"
 	"github.com/wangyi1310/mycloud-disk/pkg/email"
+	"github.com/wangyi1310/mycloud-disk/pkg/session"
 )
 
 func Init(path string) {
@@ -43,6 +44,12 @@ func Init(path string) {
 			"both",
 			func() {
 				email.Init()
+			},
+		},
+		{
+			"both",
+			func() {
+				session.Init()
 			},
 		},
 	}
