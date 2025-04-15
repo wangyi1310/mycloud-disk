@@ -2,10 +2,28 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/wangyi1310/mycloud-disk/pkg/session"
 	"github.com/wangyi1310/mycloud-disk/serializer"
 	"github.com/wangyi1310/mycloud-disk/services"
 )
 
+func UserLogin(c *gin.Context) {
+	var login services.LoginUser
+	if err := c.ShouldBindJSON(&login); err == nil {
+		user, err := services.Login(&login)
+		if err != nil {
+			c.JSON(200, serializer.Err(serializer.CodeCredentialInvalid, "Failed to login", err))
+		}
+
+		session.SetSession(c, map[string]interface{}{
+			"user_id": user.ID,
+		})
+		c.JSON(200, user)
+
+	} else {
+		c.JSON(200, serializer.Err(serializer.CodeParamErr, "Failed to parse params", err))
+	}
+}
 
 // UserRegister 用户注册
 func UserRegister(c *gin.Context) {
@@ -14,7 +32,8 @@ func UserRegister(c *gin.Context) {
 	err := c.BindJSON(&register)
 	var res serializer.Response
 	if err != nil {
-		res = serializer.Err(serializer.CodeParamErr, "参数错误", err)
+		c.JSON(200, serializer.Err(serializer.CodeParamErr, "Failed to parse params", err))
+		return
 	}
 	res = services.Register(&register)
 	c.JSON(200, res)

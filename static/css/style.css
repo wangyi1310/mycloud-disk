@@ -99,3 +99,54 @@ body {
 .registration-form button:hover {
     background-color: #2376d4;
 }
+
+/* 注册和登录容器通用样式 */
+.registration-container,
+.login-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 表单组样式 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* 标签样式 */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* 输入框样式 */
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* 提交按钮样式 */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* 错误消息样式 */
+.error-message {
+    color: red;
+    margin-top: 10px;
+}

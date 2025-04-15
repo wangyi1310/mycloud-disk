@@ -1,16 +1,14 @@
 package services
 
 import (
+	"net/url"
+
 	"github.com/wangyi1310/mycloud-disk/models"
 	"github.com/wangyi1310/mycloud-disk/pkg/auth"
 	"github.com/wangyi1310/mycloud-disk/pkg/email"
 	"github.com/wangyi1310/mycloud-disk/pkg/hashid"
 	"github.com/wangyi1310/mycloud-disk/serializer"
-	"net/url"
 )
-
-type UserService struct {
-}
 
 type RegisterUser struct {
 	Name     string `json:"name" binding:"required,min=2,max=30"`
@@ -22,6 +20,25 @@ type ActiveUser struct {
 	Uid any
 }
 
+// UserLoginService 管理用户登录的服务
+type LoginUser struct {
+	//TODO 细致调整验证规则
+	UserName string `form:"userName" json:"userName" binding:"required"`
+	Password string `form:"Password" json:"Password" binding:"required,min=4,max=64"`
+}
+
+func Login(login *LoginUser) (*models.User, error) {
+	expectedUser, err := models.GetUserByEmail(login.UserName)
+	if err != nil {
+		return nil, err
+	}
+
+	if authOK, _ := expectedUser.CheckPassword(login.Password); !authOK {
+		return nil, err
+	}
+	return &expectedUser, nil
+
+}
 func Register(r *RegisterUser) serializer.Response {
 	options := models.GetSettingByNames("email_active")
 	enableEmailActive := models.IsTrueVal(options["email_active"])

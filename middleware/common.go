@@ -20,8 +20,8 @@ var Store sessions.Store
 // Session 初始化session
 func Session(secret string) gin.HandlerFunc {
 	// Redis设置不为空，且非测试模式时使用Redis
+	// 获取本地的全局Store
 	Store = session.NewStore(cache.Store, []byte(secret))
-
 	sameSiteMode := http.SameSiteDefaultMode
 	switch strings.ToLower(conf.CORSConfig.SameSite) {
 	case "default":
@@ -35,6 +35,7 @@ func Session(secret string) gin.HandlerFunc {
 	}
 
 	// Also set Secure: true if using SSL, you should though
+	// 设置单个Store的保存策略
 	Store.Options(sessions.Options{
 		HttpOnly: true,
 		MaxAge:   60 * 86400,
@@ -43,6 +44,8 @@ func Session(secret string) gin.HandlerFunc {
 		Secure:   conf.CORSConfig.Secure,
 	})
 
+	// 启动中间件的时候创建store，并在后续请求时set到每个请求的context中
+	// Session管理器器
 	return sessions.Sessions("session", Store)
 }
 

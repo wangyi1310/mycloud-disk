@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的云盘</title>
-    <!-- 引入自定义样式文件 -->
+    <title>注册与登录</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-    <!-- 头部导航栏 -->
-    <header class="header">
-        <div class="logo">我的云盘</div>
-        <nav class="nav">
-            <a href="#">首页</a>
-            <a href="#">文件</a>
-            <a href="#">分享</a>
-        </nav>
-        <div class="user-info">
-            <span>用户名</span>
-            <img src="images/avatar.png" alt="头像">
-        </div>
-    </header>
 
-    <!-- 主内容区域 -->
-    <main class="main-content">
-        <!-- 注册表单 -->
-        <form id="registrationForm" class="registration-form">
-            <h2>注册</h2>
-            <input type="text" id="username" placeholder="用户名">
-            <input type="email" id="email" placeholder="邮箱">
-            <input type="password" id="password" placeholder="密码">
+<body>
+    <!-- 注册表单，假设已有 -->
+    <div class="registration-container">
+        <h2>注册</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="regUsername">用户名:</label>
+                <input type="text" id="regUsername" name="regUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="regEmail">邮箱:</label>
+                <input type="email" id="regEmail" name="regEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="regPassword">密码:</label>
+                <input type="password" id="regPassword" name="regPassword" required>
+            </div>
             <button type="submit">注册</button>
         </form>
-    </main>
+        <div id="regErrorMessage" class="error-message"></div>
+    </div>
 
-    <!-- 引入脚本文件 -->
+    <!-- 新增登录表单 -->
+    <div class="login-container">
+        <h2>登录</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">密码:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">登录</button>
+        </form>
+        <div id="loginErrorMessage" class="error-message"></div>
+    </div>
+
     <script src="js/script.js"></script>
 </body>
+
 </html>

@@ -46,6 +46,7 @@ func InitMaster() *gin.Engine {
 	InitCORS(r)
 	r.Use(gzip.Gzip(gzip.DefaultCompression, gzip.WithExcludedPaths([]string{"/api/"})))
 	v3 := r.Group("/api/v3")
+	//设置session存储器
 	v3.Use(middleware.Session(conf.SystemConfig.SessionSecret))
 	v3.Use(middleware.CurrentUser())
 	v3.Use(middleware.CacheControl())
@@ -64,6 +65,7 @@ func InitMaster() *gin.Engine {
 			middleware.HashID(hashid.UserID),
 			controllers.UserActive,
 		)
+		user.POST("login", controllers.UserLogin)
 	}
 
 	r.Static("/static", "./static")
