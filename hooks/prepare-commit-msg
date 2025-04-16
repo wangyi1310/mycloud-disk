@@ -32,6 +32,9 @@ case "$COMMIT_MSG" in
   revert:*)
     EMOJI=":rewind:"    # 回滚代码
     ;;
+  deps:*)
+    EMOJI=":arrow_up:"  # 更新依赖
+    ;;
   *)
     EMOJI=":pencil:"    # 默认 emoji（未匹配到类型）
     ;;

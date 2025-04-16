@@ -12,7 +12,7 @@ require (
 	github.com/gorilla/securecookie v1.1.2
 	github.com/gorilla/sessions v1.2.2
 	github.com/hashicorp/go-version v1.3.0
-	github.com/mojocn/base64Captcha v0.0.0-20190801020520-752b1cd608b2
+	github.com/mojocn/base64Captcha v1.3.5
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/time v0.11.0
 )
