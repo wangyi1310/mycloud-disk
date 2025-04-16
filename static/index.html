@@ -4,50 +4,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>注册与登录</title>
+    <title>我的云盘</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-    <!-- 注册表单，假设已有 -->
-    <div class="registration-container">
-        <h2>注册</h2>
-        <form id="registrationForm">
-            <div class="form-group">
-                <label for="regUsername">用户名:</label>
-                <input type="text" id="regUsername" name="regUsername" required>
+    <!-- 导航栏 -->
+    <header class="header">
+        <div class="logo">OCCRQ 网盘</div>
+        <nav class="nav">
+            <a href="#">产品介绍</a>
+            <a href="#">使用帮助</a>
+            <a href="#">关于我们</a>
+        </nav>
+        <!-- <div class="auth-buttons">
+            <button class="btn login-btn" onclick="openModal('loginModal')">登录</button>
+            <button class="btn register-btn" onclick="openModal('registerModal')">注册</button>
+        </div> -->
+    </header>
+
+    <!-- 主宣传区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>安全、便捷的云存储服务</h1>
+            <p>随时随地访问您的文件，与他人轻松共享。</p>
+            <div class="hero-buttons">
+                <button class="btn login-btn" onclick="openModal('loginModal')">立即登录</button>
+                <button class="btn register-btn" onclick="openModal('registerModal')">立即注册</button>
             </div>
-            <div class="form-group">
-                <label for="regEmail">邮箱:</label>
-                <input type="email" id="regEmail" name="regEmail" required>
-            </div>
-            <div class="form-group">
-                <label for="regPassword">密码:</label>
-                <input type="password" id="regPassword" name="regPassword" required>
-            </div>
-            <button type="submit">注册</button>
-        </form>
-        <div id="regErrorMessage" class="error-message"></div>
+        </div>
+    </section>
+
+    <!-- 功能特性区域 -->
+    <section class="features">
+        <div class="feature-item">
+            <h3>安全可靠</h3>
+            <p>采用先进的加密技术，保障您的数据安全。</p>
+        </div>
+        <div class="feature-item">
+            <h3>多端同步</h3>
+            <p>支持手机、电脑、平板等多设备同步访问。</p>
+        </div>
+        <div class="feature-item">
+            <h3>超大空间</h3>
+            <p>提供免费的超大存储空间，满足您的各种需求。</p>
+        </div>
+    </section>
+
+    <!-- 登录弹框 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content login-container">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>登录</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">用户名:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">密码:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit">登录</button>
+            </form>
+            <div id="loginErrorMessage" class="error-message"></div>
+        </div>
     </div>
 
-    <!-- 新增登录表单 -->
-    <div class="login-container">
-        <h2>登录</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">用户名:</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="form-group">
-                <label for="password">密码:</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <button type="submit">登录</button>
-        </form>
-        <div id="loginErrorMessage" class="error-message"></div>
+    <!-- 注册弹框 -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content registration-container">
+            <span class="close" onclick="closeModal('registerModal')">&times;</span>
+            <h2>注册</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="regUsername">用户名:</label>
+                    <input type="text" id="regUsername" name="regUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">邮箱:</label>
+                    <input type="email" id="regEmail" name="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">密码:</label>
+                    <input type="password" id="regPassword" name="regPassword" required>
+                </div>
+                <button type="submit">注册</button>
+            </form>
+            <div id="regErrorMessage" class="error-message"></div>
+        </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <!-- 页脚 -->
+    <footer class="footer">
+        <p>&copy; 2025 我的云盘. 保留所有权利。</p>
+    </footer>
+
+    <script src="js/modal.js"></script>
+    <script src="js/login.js"></script>
+    <script src="js/register.js"></script>
 </body>
 
 </html>

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/wangyi1310/mycloud-disk/models"
 	"github.com/wangyi1310/mycloud-disk/pkg/session"
 	"github.com/wangyi1310/mycloud-disk/serializer"
 	"github.com/wangyi1310/mycloud-disk/services"
@@ -22,7 +23,7 @@ func UserLogin(c *gin.Context) {
 	session.SetSession(c, map[string]interface{}{
 		"user_id": user.ID,
 	})
-	c.JSON(200, user)
+	c.JSON(200, serializer.Response{Data: user})
 }
 
 // UserRegister 用户注册
@@ -45,4 +46,13 @@ func UserActive(c *gin.Context) {
 		Uid: uid,
 	})
 	c.JSON(200, res)
+}
+
+func UserInfo(c *gin.Context) {
+	user, exist := c.Get("user")
+	if !exist {
+		c.JSON(200, serializer.Err(serializer.CodeCheckLogin, "User not login", nil))
+		return
+	}
+	c.JSON(200, serializer.Response{Data: user.(*models.User)})
 }

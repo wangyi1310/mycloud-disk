@@ -15,4 +15,6 @@ RUN apk update \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo "Asia/Shanghai" > /etc/timezone \
     && chmod +x ./ mycloud-disk 
+
+# 暴露端口
 CMD ["./mycloud-disk"]

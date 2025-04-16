@@ -7,35 +7,193 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f5f6f7;
+    line-height: 1.6;
+
+    background-color: #000000; 
+    color: #ffffff; 
 }
 
-/* 头部导航栏样式 */
+/* 导航栏样式 */
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; 
     align-items: center;
-    height: 60px;
-    padding: 0 20px;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+
+    /* 设置 header 背景为黑色 */
+    background-color: #000000; 
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
-    color: #2d8cf0;
+    /* 设置字体颜色为白色 */
+    color: #ffffff; 
+    margin-right: 2rem; 
+}
+
+.nav {
+    display: flex;
+    justify-content: flex-start; 
 }
 
 .nav a {
-    margin: 0 15px;
+    /* 设置字体颜色为白色 */
+    color: #ffffff; 
     text-decoration: none;
-    color: #333;
+    margin: 0 1rem;
     transition: color 0.3s;
 }
 
 .nav a:hover {
-    color: #2d8cf0;
+    color: #007BFF; 
+}
+
+.auth-buttons {
+    margin-left: auto; 
+}
+
+
+/* 后续样式保持不变，可按需继续检查其他有背景和文字颜色设置的地方 */
+/* 背景图设置，将 your-background-image.jpg 替换为实际图片路径 */
+.hero {
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-align: center;
+}
+
+/* 导航栏样式 */
+.header {
+    display: flex;
+    justify-content: flex-start; /* 修改为靠左对齐 */
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+/* 后续样式中，部分元素可能有单独设置的 color 属性，若需要统一为白色，也需要修改，示例如下 */
+.nav a {
+    /* 修改为白色 */
+    color: #ffffff; 
+    text-decoration: none;
+    margin: 0 1rem;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    /* 鼠标悬停时的颜色也可按需调整 */
+    color: #007BFF; 
+}
+
+/* 其他有文字颜色设置的元素，都需要检查并按需修改 */
+
+.auth-buttons {
+    margin-left: auto; /* 将登录注册按钮推到最右边 */
+}
+
+.nav a:hover {
+    color: #007BFF;
+}
+
+.auth-buttons button {
+    margin-left: 1rem;
+}
+
+/* 按钮样式 */
+.btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-primary {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: #007BFF;
+}
+
+.login-btn {
+    background-color: transparent;
+    color: #ccc;
+    border: 1px solid #fff;
+}
+
+.register-btn {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* 主宣传区域样式 */
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-buttons button {
+    margin: 0 0.5rem;
+}
+
+/* 功能特性区域样式 */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 4rem 2rem;
+}
+
+.feature-item {
+    text-align: center;
+    max-width: 300px;
+}
+
+.feature-item img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* 页脚样式 */
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
 }
 
 .user-info {
@@ -100,6 +258,27 @@ body {
     background-color: #2376d4;
 }
 
+/* 标签页容器样式 */
+.tab-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* 标签页按钮样式 */
+.tab-btn {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.tab-btn:hover {
+    background-color: #0056b3;
+}
+
 /* 注册和登录容器通用样式 */
 .registration-container,
 .login-container {
@@ -126,7 +305,7 @@ body {
 .form-group input {
     width: 100%;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #0000;
     border-radius: 3px;
 }
 
@@ -149,4 +328,53 @@ button[type="submit"]:hover {
 .error-message {
     color: red;
     margin-top: 10px;
+}
+
+/* 弹框背景 */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1001; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    /* 修改为半透明背景 */
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+/* 弹框内容 */
+.modal-content {
+    background-color: #514f4f;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 400px;
+    position: relative;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 关闭按钮 */
+.close {
+    color: #999;
+    position: absolute;
+    right: 12px;
+    top: 8px;
+    font-size: 24px;
+    font-weight: normal;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.close:hover,
+.close:focus {
+    color: #fff;
+    background-color: #ff4444;
+    cursor: pointer;
 }

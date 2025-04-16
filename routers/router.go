@@ -68,6 +68,7 @@ func InitMaster() *gin.Engine {
 			controllers.UserActive,
 		)
 		user.POST("login", controllers.UserLogin)
+		user.GET("info", controllers.UserInfo)
 	}
 
 	r.Static("/static", "./static")

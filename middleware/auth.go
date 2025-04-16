@@ -13,10 +13,11 @@ func CurrentUser() gin.HandlerFunc {
 		uid := session.Values["user_id"]
 		if uid != nil {
 			user, err := models.GetActiveUserByID(uid)
-			if err == nil {
+			if err != nil {
 				c.Set("user", &user)
 			}
 		}
+
 		c.Next()
 	}
 }

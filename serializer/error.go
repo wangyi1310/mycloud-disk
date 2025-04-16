@@ -181,6 +181,7 @@ const (
 	CodeInvalidGiftCode = 40065
 	// 已绑定了QQ账号
 	CodeQQBindConflict = 40066
+
 	// QQ账号已被绑定其他账号
 	CodeQQBindOtherAccount = 40067
 	// QQ 未绑定对应账号
