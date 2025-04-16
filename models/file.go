@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jinzhu/gorm"
 	"github.com/wangyi1310/mycloud-disk/pkg/log"
+	"gorm.io/gorm"
 )
 
 // File 文件

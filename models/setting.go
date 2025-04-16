@@ -4,8 +4,8 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/jinzhu/gorm"
 	"github.com/wangyi1310/mycloud-disk/pkg/cache"
+	"gorm.io/gorm"
 )
 
 // Setting 系统设置模型

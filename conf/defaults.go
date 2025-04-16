@@ -53,3 +53,5 @@ var UnixConfig = &unix{
 }
 
 var OptionOverwrite = map[string]interface{}{}
+
+var DefaultAvatar = "/static/pic/avatar.png"

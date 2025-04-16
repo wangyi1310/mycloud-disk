@@ -8,9 +8,9 @@ import (
 	"encoding/json"
 	"strings"
 
-	"github.com/jinzhu/gorm"
 	"github.com/pkg/errors"
 	"github.com/wangyi1310/mycloud-disk/pkg/util"
+	"gorm.io/gorm"
 )
 
 const (

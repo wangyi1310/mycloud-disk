@@ -53,7 +53,7 @@ body {
     color: #007BFF; 
 }
 
-.auth-buttons {
+.user-info {
     margin-left: auto; 
 }
 
@@ -196,9 +196,32 @@ body {
     color: #fff;
 }
 
+/* 原有样式保持不变 */
+
 .user-info {
     display: flex;
     align-items: center;
+    gap: 10px;
+}
+
+#avatarDisplay {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: transform 0.3s ease; /* 添加过渡效果，让动画更平滑 */
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+#avatarDisplay:hover {
+    animation: rotate 1s linear infinite;
 }
 
 .user-info span {

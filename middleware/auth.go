@@ -3,6 +3,7 @@ package middleware
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/wangyi1310/mycloud-disk/models"
+	"github.com/wangyi1310/mycloud-disk/pkg/log"
 	"github.com/wangyi1310/mycloud-disk/pkg/session"
 )
 
@@ -14,8 +15,10 @@ func CurrentUser() gin.HandlerFunc {
 		if uid != nil {
 			user, err := models.GetActiveUserByID(uid)
 			if err != nil {
-				c.Set("user", &user)
+				log.Log().Panic("User:%s not exsit err:%v", uid, err)
+				c.Abort()
 			}
+			c.Set("user", &user)
 		}
 
 		c.Next()

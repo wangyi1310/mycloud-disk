@@ -5,8 +5,9 @@ import (
 	"strings"
 	"time"
 
-	_ "github.com/glebarez/go-sqlite"
-	"github.com/jinzhu/gorm"
+	"gorm.io/driver/sqlite" // V2 专用驱动
+	"gorm.io/gorm"
+	"gorm.io/driver/mysql"
 	"github.com/wangyi1310/mycloud-disk/conf"
 	"github.com/wangyi1310/mycloud-disk/pkg/log"
 	"github.com/wangyi1310/mycloud-disk/pkg/util"
@@ -38,8 +39,9 @@ func connectSQLite(confDBType string) (*gorm.DB, error) {
 		dbFilePath = conf.DatabaseConfig.DBFile
 	}
 	dbFullFilePath := util.RelativePath(dbFilePath)
-	return gorm.Open("sqlite", util.RelativePath(dbFullFilePath))
+	return gorm.Open(sqlite.Open(util.RelativePath(dbFullFilePath)))
 }
+
 
 func connectMySQL(confDBType string) (*gorm.DB, error) {
 	var host string
@@ -52,12 +54,12 @@ func connectMySQL(confDBType string) (*gorm.DB, error) {
 			conf.DatabaseConfig.Port)
 	}
 
-	db, err := gorm.Open(confDBType, fmt.Sprintf("%s:%s@%s/%s?charset=%s&parseTime=True&loc=Local",
+	db, err := gorm.Open(mysql.Open(fmt.Sprintf("%s:%s@%s/%s?charset=%s&parseTime=True&loc=Local",
 		conf.DatabaseConfig.User,
 		conf.DatabaseConfig.Password,
 		host,
 		conf.DatabaseConfig.Name,
-		conf.DatabaseConfig.Charset))
+		conf.DatabaseConfig.Charset)))
 	return db, err
 }
 
@@ -79,19 +81,17 @@ func Init() {
 	}
 
 	if conf.SystemConfig.Debug {
-		db.LogMode(true)
-	} else {
-		db.LogMode(false)
+		db = db.Debug()
 	}
 
-	db.DB().SetMaxIdleConns(50)
+	d,_ := db.DB()
 	if dbType == SQLITE || dbType == SQLITE3 || dbType == UNSET {
-		db.DB().SetMaxOpenConns(1)
+		d.SetMaxOpenConns(1)
 	} else {
-		db.DB().SetMaxOpenConns(100)
+		d.SetMaxOpenConns(100)
 	}
 
-	db.DB().SetConnMaxLifetime(time.Second * 30)
+	d.SetConnMaxLifetime(time.Second * 30)
 	DB = db
 
 	migration()

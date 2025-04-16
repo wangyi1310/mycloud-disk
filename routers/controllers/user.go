@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/wangyi1310/mycloud-disk/conf"
 	"github.com/wangyi1310/mycloud-disk/models"
 	"github.com/wangyi1310/mycloud-disk/pkg/session"
 	"github.com/wangyi1310/mycloud-disk/serializer"
@@ -53,6 +54,11 @@ func UserInfo(c *gin.Context) {
 	if !exist {
 		c.JSON(200, serializer.Err(serializer.CodeCheckLogin, "User not login", nil))
 		return
+	}
+
+	u := user.(*models.User)
+	if u.Avatar == "" {
+		u.Avatar = conf.DefaultAvatar
 	}
 	c.JSON(200, serializer.Response{Data: user.(*models.User)})
 }

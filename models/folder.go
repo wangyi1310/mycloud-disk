@@ -5,9 +5,9 @@ import (
 	"path"
 	"time"
 
-	"github.com/jinzhu/gorm"
 	"github.com/wangyi1310/mycloud-disk/pkg/log"
 	"github.com/wangyi1310/mycloud-disk/pkg/util"
+	"gorm.io/gorm"
 )
 
 // Folder 目录
@@ -199,7 +199,7 @@ func (folder *Folder) MoveOrCopyFileTo(files []uint, dstFolder *Folder, isCopy b
 			folder.OwnerID,
 			folder.ID,
 		).
-			Update(updates).
+			Updates(updates).
 			Error
 		if err != nil {
 			return 0, err
@@ -313,7 +313,7 @@ func (folder *Folder) MoveFolderTo(dirs []uint, dstFolder *Folder) error {
 		dirs,
 		folder.OwnerID,
 		folder.ID,
-	).Update(updates).Error
+	).Updates(updates).Error
 
 	return err
 

@@ -5,12 +5,14 @@ import (
 	// "sort"
 	// "strings"
 
+	"errors"
+
 	"github.com/fatih/color"
-	"github.com/jinzhu/gorm"
 	"github.com/wangyi1310/mycloud-disk/conf"
 	"github.com/wangyi1310/mycloud-disk/pkg/cache"
 	"github.com/wangyi1310/mycloud-disk/pkg/log"
 	"github.com/wangyi1310/mycloud-disk/pkg/util"
+	"gorm.io/gorm"
 )
 
 // 是否需要迁移
@@ -164,7 +166,7 @@ func addDefaultUser() {
 	password := util.RandStringRunes(8)
 
 	// 未找到初始用户时，则创建
-	if gorm.IsRecordNotFoundError(err) {
+	if errors.Is(err, gorm.ErrRecordNotFound){
 		defaultUser := NewUser()
 		defaultUser.Email = "admin@cloudreve.org"
 		defaultUser.Nick = "admin"
@@ -187,7 +189,7 @@ func addDefaultUser() {
 func addDefaultNode() {
 	_, err := GetNodeByID(1)
 
-	if gorm.IsRecordNotFoundError(err) {
+	if errors.Is(err, gorm.ErrRecordNotFound) {
 		defaultAdminGroup := Node{
 			Name:   "Master (Local machine)",
 			Status: NodeActive,
