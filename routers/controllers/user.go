@@ -27,6 +27,11 @@ func UserLogin(c *gin.Context) {
 	c.JSON(200, serializer.Response{Data: user})
 }
 
+func UserLogout(c *gin.Context) {
+	session.DeleteSession(c)
+	c.JSON(200, serializer.Response{})
+}
+
 // UserRegister 用户注册
 func UserRegister(c *gin.Context) {
 	// 注册逻辑

@@ -24,7 +24,8 @@
                <!-- 用户信息展示容器 -->
         <div id="userInfo" class="user-info">
             <span id="usernameDisplay">未登录</span>
-            <img id="avatarDisplay" src="" alt="头像" style="display: none;">
+            <img id="avatarDisplay" src="" alt="头像" style="display: none;" onclick="toggleLogoutButton()">
+            <button id="logout-btn" class="logout-btn" style="display: none;" onclick="logout()">登出</button>
         </div>
 
     </header>
@@ -35,8 +36,8 @@
             <h1>安全、便捷的云存储服务</h1>
             <p>随时随地访问您的文件，与他人轻松共享。</p>
             <div class="hero-buttons">
-                <button class="btn login-btn" onclick="openModal('loginModal')">立即登录</button>
-                <button class="btn register-btn" onclick="openModal('registerModal')">立即注册</button>
+                <button id ="login-btn" class="btn login-btn" onclick="openModal('loginModal')">立即登录</button>
+                <button id="register-btn" class="btn register-btn" onclick="openModal('registerModal')">立即注册</button>
             </div>
         </div>
     </section>
@@ -106,10 +107,10 @@
         <p>&copy; 2025 我的云盘. 保留所有权利。</p>
     </footer>
 
-    <script src="js/modal.js"></script>
-    <script src="js/login.js"></script>
-    <script src="js/register.js"></script>
-    <script src="js/user.js"></script>
+    <script src="js/index/modal.js"></script>
+    <script src="js/index/login.js"></script>
+    <script src="js/index/register.js"></script>
+    <script src="js/index/user.js"></script>
 </body>
 
 </html>

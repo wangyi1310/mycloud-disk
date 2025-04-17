@@ -68,6 +68,7 @@ func InitMaster() *gin.Engine {
 			controllers.UserActive,
 		)
 		user.POST("login", controllers.UserLogin)
+		user.POST("logout", controllers.UserLogout)
 		user.GET("info", controllers.UserInfo)
 	}
 

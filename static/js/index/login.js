@@ -33,6 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
             alert('登录成功！');
+            loginModal.classList.remove('open');
+            // 登录成功后刷新页面
+            window.location.reload();
         } catch (error) {
             console.error('登录请求出错:', error);
             loginErrorMessage.textContent = '网络错误，请稍后重试';
