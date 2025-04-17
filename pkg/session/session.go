@@ -50,10 +50,8 @@ func DeleteSession(c *gin.Context) {
 		log.Log().Warning("获取 session 失败: %v", err)
 		return
 	}
-	// 将 MaxAge 设置为负数，让 session 立即过期
-	session.Options.MaxAge = -1
-	// 清空 session 的值
-	session.Values = make(map[interface{}]interface{})
+
+	delete(session.Values, "user_id")
 	// 保存修改到响应中
 	err = session.Save(c.Request, c.Writer)
 	if err != nil {
